@@ -1,13 +1,10 @@
 package com.jonathas.gerenciadorfinanceiro.controller;
 
-import com.jonathas.gerenciadorfinanceiro.domain.Gastos;
+import com.jonathas.gerenciadorfinanceiro.domain.Gasto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.jonathas.gerenciadorfinanceiro.repositorios.GastosRepository;
-
-import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 @RequestMapping(path="/gastos")
@@ -17,7 +14,7 @@ public class GastosController {
 
     //método GET
     @GetMapping
-    public Iterable<Gastos> listarGastos() {
+    public Iterable<Gasto> listarGastos() {
         return gastosRepository.findAll();
     }
 
@@ -32,7 +29,7 @@ public class GastosController {
     //método POST
     //Utiliza o método save de repository e retorna para o usuário o corpo da requisição salva
     @PostMapping
-    public Gastos create(@RequestBody Gastos gastos) {
+    public Gasto create(@RequestBody Gasto gastos) {
         return gastosRepository.save(gastos);
     }
 
