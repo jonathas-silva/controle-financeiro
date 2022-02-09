@@ -16,6 +16,7 @@ public class Gasto {
     @JoinColumn(name = "categoria_id") //nome da chave estrangeira
     private Categoria categoria;
 
+
     public Integer getId() {
         return id;
     }
