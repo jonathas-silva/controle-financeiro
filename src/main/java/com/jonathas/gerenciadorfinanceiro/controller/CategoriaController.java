@@ -3,9 +3,8 @@ package com.jonathas.gerenciadorfinanceiro.controller;
 import com.jonathas.gerenciadorfinanceiro.domain.Categoria;
 import com.jonathas.gerenciadorfinanceiro.repositorios.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/categorias")
@@ -17,5 +16,29 @@ public class CategoriaController {
     @GetMapping
     public Iterable<Categoria> listarCategorias(){
         return categoriaRepository.findAll();
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity selecionarCategoria(@PathVariable Integer id){
+        if(categoriaRepository.findById(id).isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok().body(categoriaRepository.findById(id));
+        }
+    }
+
+    @PostMapping
+    public Categoria inserir(@RequestBody Categoria categoria){
+        return categoriaRepository.save(categoria);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<?> deletarCategoria(@PathVariable Integer id){
+        if(categoriaRepository.findById(id).isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            categoriaRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
     }
 }
