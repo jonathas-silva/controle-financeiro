@@ -2,6 +2,7 @@ package com.jonathas.gerenciadorfinanceiro.controller;
 
 import com.jonathas.gerenciadorfinanceiro.domain.Categoria;
 import com.jonathas.gerenciadorfinanceiro.domain.Gasto;
+import com.jonathas.gerenciadorfinanceiro.dto.GastoDTO;
 import com.jonathas.gerenciadorfinanceiro.repositorios.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ public class GastoController {
 
     @Autowired
     private GastoRepository gastoRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @GetMapping
     public Iterable<Gasto> listarTudo(){
@@ -35,5 +38,15 @@ public class GastoController {
             gastoRepository.deleteById(id);
             return ResponseEntity.ok().build();
         }else return ResponseEntity.notFound().build();
+    }
+    @PostMapping
+    public Gasto inserir(@RequestBody GastoDTO gastoDTO){
+        Gasto gasto = new Gasto();
+        Categoria categoria = categoriaRepository.getById(gastoDTO.getCategoria());
+        gasto.setValor(gastoDTO.getValor());
+        gasto.setDescricao(gastoDTO.getDescricao());
+        gasto.setCategoria(categoria);
+        gasto.setData(gastoDTO.getData());
+        return gastoRepository.save(gasto);
     }
 }

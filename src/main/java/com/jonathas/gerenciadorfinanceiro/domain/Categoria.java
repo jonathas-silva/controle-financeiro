@@ -1,12 +1,13 @@
 package com.jonathas.gerenciadorfinanceiro.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /*Classe para representar as formas de pagamento disponíveis e utilizadas*/
 @Entity
-public class Categoria {
+public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

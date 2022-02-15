@@ -1,10 +1,11 @@
 package com.jonathas.gerenciadorfinanceiro.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
-public class Gasto {
+public class Gasto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
