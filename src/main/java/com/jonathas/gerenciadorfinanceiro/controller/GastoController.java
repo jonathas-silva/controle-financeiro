@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.jonathas.gerenciadorfinanceiro.repositorios.GastoRepository;
 
 import java.sql.Date;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/gastos")
@@ -39,13 +40,15 @@ public class GastoController {
             return ResponseEntity.ok().build();
         }else return ResponseEntity.notFound().build();
     }
+
+    /*Aparentemente é melhor utilizar o método findById em detrimento do GetById*/
     @PostMapping
     public Gasto inserir(@RequestBody GastoDTO gastoDTO){
         Gasto gasto = new Gasto();
-        Categoria categoria = categoriaRepository.getById(gastoDTO.getCategoria());
+        Optional<Categoria> categoria = categoriaRepository.findById(gastoDTO.getCategoria());
         gasto.setValor(gastoDTO.getValor());
         gasto.setDescricao(gastoDTO.getDescricao());
-        gasto.setCategoria(categoria);
+        gasto.setCategoria(categoria.get());
         gasto.setData(gastoDTO.getData());
         return gastoRepository.save(gasto);
     }
