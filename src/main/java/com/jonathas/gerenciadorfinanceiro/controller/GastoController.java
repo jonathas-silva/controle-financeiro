@@ -52,4 +52,24 @@ public class GastoController {
         gasto.setData(gastoDTO.getData());
         return gastoRepository.save(gasto);
     }
+    @PutMapping(path = "/{id}")
+    public Gasto update(@RequestBody GastoDTO gastoDTO, @PathVariable Integer id){
+        Gasto gasto = gastoRepository.findById(id).get(); //pegando o objeto com o id dado.
+
+        //trocando as categorias que foram informadas
+        if(gastoDTO.getCategoria()!=null){
+            Optional<Categoria> categoria = categoriaRepository.findById(gastoDTO.getCategoria());
+            gasto.setCategoria(categoria.get());
+        }else{
+            gasto.setCategoria(null);
+        }git
+
+
+        gasto.setValor(gastoDTO.getValor());
+        gasto.setDescricao(gastoDTO.getDescricao());
+
+        gasto.setData(gastoDTO.getData());
+
+        return gastoRepository.save(gasto);
+    }
 }
