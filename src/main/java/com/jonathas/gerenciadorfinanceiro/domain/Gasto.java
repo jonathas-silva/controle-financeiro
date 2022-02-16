@@ -2,14 +2,17 @@ package com.jonathas.gerenciadorfinanceiro.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
+
 
 @Entity
 public class Gasto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date data; //adicionado por último
+
+   // @JsonFormat(pattern = "dd/MM/yyyy", locale = "pt_BR")
+    private LocalDate data;
     private Double valor;
     private String descricao;
 
@@ -26,11 +29,11 @@ public class Gasto implements Serializable {
         this.id = id;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

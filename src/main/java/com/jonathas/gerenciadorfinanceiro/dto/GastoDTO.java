@@ -1,12 +1,12 @@
 package com.jonathas.gerenciadorfinanceiro.dto;
 
-import com.jonathas.gerenciadorfinanceiro.domain.Gasto;
-
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class GastoDTO implements Serializable {
-    private Date data;
+
+  //  @JsonFormat(pattern = "dd/MM/yyyy", locale = "pt_BR")
+    private LocalDate data;
     private Double valor;
     private String descricao;
     private Integer categoria; //inteiro representando categoria
@@ -40,11 +40,11 @@ public class GastoDTO implements Serializable {
         this.categoria = categoria;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 }
