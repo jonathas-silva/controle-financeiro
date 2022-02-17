@@ -62,7 +62,7 @@ public class GastoController {
             gasto.setCategoria(categoria.get());
         }else{
             gasto.setCategoria(null);
-        }git
+        }
 
 
         gasto.setValor(gastoDTO.getValor());

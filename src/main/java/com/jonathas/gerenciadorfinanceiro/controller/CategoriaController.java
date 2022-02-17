@@ -41,4 +41,16 @@ public class CategoriaController {
             return ResponseEntity.ok().build();
         }
     }
+    @PutMapping(path = "/{id}")
+    public Categoria atualizar(@RequestBody Categoria categoria,@PathVariable Integer id){
+        Categoria categoriaDb = categoriaRepository.findById(id).get();
+        if(categoria.getDescricao()!=null) {
+            categoriaDb.setDescricao(categoria.getDescricao());
+        }
+        if(categoria.getValor()!=0){
+            categoriaDb.setValor(categoria.getValor());
+        }
+
+        return categoriaRepository.save(categoriaDb);
+    }
 }
