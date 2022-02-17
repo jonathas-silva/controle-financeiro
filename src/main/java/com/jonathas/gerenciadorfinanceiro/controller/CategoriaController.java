@@ -47,8 +47,8 @@ public class CategoriaController {
         if(categoria.getDescricao()!=null) {
             categoriaDb.setDescricao(categoria.getDescricao());
         }
-        if(categoria.getValor()!=0){
-            categoriaDb.setValor(categoria.getValor());
+        if(categoria.getOrcamento() != null){
+            categoriaDb.setOrcamento(categoria.getOrcamento());
         }
 
         return categoriaRepository.save(categoriaDb);

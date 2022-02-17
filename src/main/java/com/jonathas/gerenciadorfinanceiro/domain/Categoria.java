@@ -12,7 +12,7 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
-    private double valor; //valor restante
+    private Double orcamento;
 
     @OneToMany(mappedBy = "categoria")
     private List<Gasto> gastos = new ArrayList<>();
@@ -34,12 +34,12 @@ public class Categoria implements Serializable {
         this.descricao = descricao;
     }
 
-    public double getValor() {
-        return valor;
+    public Double getOrcamento() {
+        return orcamento;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setOrcamento(Double orcamento) {
+        this.orcamento = orcamento;
     }
 }
 

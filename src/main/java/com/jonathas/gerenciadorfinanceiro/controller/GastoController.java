@@ -57,18 +57,22 @@ public class GastoController {
         Gasto gasto = gastoRepository.findById(id).get(); //pegando o objeto com o id dado.
 
         //trocando as categorias que foram informadas
+        //se não for informada a categoria no json, então não fazer nada (manter a categoria original)
         if(gastoDTO.getCategoria()!=null){
             Optional<Categoria> categoria = categoriaRepository.findById(gastoDTO.getCategoria());
             gasto.setCategoria(categoria.get());
-        }else{
-            gasto.setCategoria(null);
+        }
+        if(gastoDTO.getValor()!=null){
+            gasto.setValor(gastoDTO.getValor());
         }
 
+        if(gastoDTO.getDescricao()!=null){
+            gasto.setDescricao(gastoDTO.getDescricao());
+        }
 
-        gasto.setValor(gastoDTO.getValor());
-        gasto.setDescricao(gastoDTO.getDescricao());
-
-        gasto.setData(gastoDTO.getData());
+        if(gastoDTO.getData()!=null){
+            gasto.setData(gastoDTO.getData());
+        }
 
         return gastoRepository.save(gasto);
     }
